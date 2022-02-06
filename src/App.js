@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import Blocks from './components/Blocks';
 
-function App() {
+const ethers = require('ethers');
+//require('dotenv').config();
+const { useEffect, useState } = require('react');
+
+
+export default function App() {
+  //return <h1>Block Explorer</h1>;
+  const [blockNumber, setBlockNumber] = useState(0)
+  const [block, setBlock] = useState([])
+
+  const url ='https://eth-rinkeby.alchemyapi.io/v2/NDdNGFpNlYU3rcTwh-xDzZiuAMyW7IM2'
+
+ 
+  const provider = new ethers.providers.JsonRpcProvider(url);
+
+  const fetchHeaderData = async () => {
+    let myBlockNum = await provider.getBlockNumber()
+    setBlockNumber(myBlockNum)
+
+    let myBlock = await provider.getBlockWithTransactions(myBlockNum)
+    setBlock(prevBlock => [myBlock, ...prevBlock])
+    
+  }
+  fetchHeaderData()
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+      {
+          <Blocks 
+            block={block}
+          />
+      }
+      </div>
+  )
+};
 
-export default App;
