@@ -1,4 +1,5 @@
 import Blocks from './components/Blocks';
+import SpecificBlock from './components/SpecificBlock';
 
 const ethers = require('ethers');
 //require('dotenv').config();
@@ -10,6 +11,7 @@ export default function App() {
   const [blockNumber, setBlockNumber] = useState(0)
   const [block, setBlock] = useState([])
   const [toggle, setSwitch] = useState(false)
+  const [myBlockN, setMyBlockN] = useState(0)
 
 
   const url ='https://eth-rinkeby.alchemyapi.io/v2/NDdNGFpNlYU3rcTwh-xDzZiuAMyW7IM2'
@@ -36,14 +38,23 @@ useEffect(() => {
 }, [toggle])
 
   return (
-    <div>
-      {
-          <Blocks 
-            block={block}
-          />
-      }
-      </div>
-      
+   
+      myBlockN !== 0 ? 
+      <SpecificBlock
+        block={block}
+        myBlockN={myBlockN}
+      /> :
+
+      <div>
+        {
+            <Blocks 
+              block = {block}
+              setMyBlockN={setMyBlockN}
+            />
+        }
+        </div>
+
+   
   )
 };
 
