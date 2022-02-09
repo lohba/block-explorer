@@ -34,26 +34,25 @@ export default function App() {
 
 useEffect(() => {
   fetchHeaderData()
-  setTimeout(changeSwitch, 14000) // Blocks mined 12-14 seconds
+  setTimeout(changeSwitch, 10000) // Blocks mined 12-14 seconds
 }, [toggle])
 
   return (
-   
+
       myBlockN !== 0 ? 
       <SpecificBlock
         block={block}
         myBlockN={myBlockN}
+        setMyBlockN={setMyBlockN}
       /> :
-
       <div>
         {
-            <Blocks 
-              block = {block}
-              setMyBlockN={setMyBlockN}
-            />
+          <Blocks 
+            block = {block}
+            setMyBlockN={setMyBlockN}
+          />
         }
         </div>
-
    
   )
 };
