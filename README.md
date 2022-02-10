@@ -1,7 +1,5 @@
 # Ethereum Block Explorer
 
-https://myeth-block-explorer.netlify.app/
-
 This project uses Ethers.js to display the most recent mined blocks
 
 ## Features
